@@ -1,0 +1,17 @@
+USE FileManager;
+GO
+
+CREATE TABLE Users (
+    Id INT IDENTITY PRIMARY KEY,
+    Username NVARCHAR(50) UNIQUE NOT NULL,
+    PasswordHash NVARCHAR(255) NOT NULL
+);
+
+CREATE TABLE FileLogs (
+    Id INT IDENTITY PRIMARY KEY,
+    UserId INT,
+    Action NVARCHAR(50),
+    FileName NVARCHAR(255),
+    Time DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (UserId) REFERENCES Users(Id)
+);
